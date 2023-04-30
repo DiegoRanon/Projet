@@ -1,0 +1,81 @@
+rapport partie 1: 
+    1. creer un workspace react
+
+    2. creer une page d'Acceuil avec le logo du ocllege et une description generale des fonctionnalites.
+
+    3 un menu de Navigation apparaisant sur chaque page
+        3.1 menu mobile
+        
+    4. creer une page cours qui indique les données des cours de la session actuelle (avec des filtre des session precedente)
+        4.1 la page cours contient un formulaire qui permet d'ajouter un cours(Cours,discipline,nombre max d'eleve , date Debut,date Fin)
+        4.2 des page personaliser pour chacun des cours
+    5. creer une page professeur qui vas lister les professeurs du colleges
+        5.1 lister les prof avec luer image et les cours qu'il donnent.
+        5.2 utiliser des composant "Card" pour chaque prof de la lister
+        5.3 il y a un formulaire qui permet d'ajouter des prof avec (une date d’embauche, un nom, un pr´enom, une photo)    
+
+rapport partie 2: 
+    1. creer un workspace react fait
+
+    2. creer une page d'Acceuil avec le logo du ocllege et une description generale des fonctionnalites. fait
+
+    3 un menu de Navigation apparaisant sur chaque page fait 
+        3.1 menu mobile pas fait
+         
+    4. creer une page cours qui indique les données des cours de la session actuelle (avec des filtre des session precedente) fait
+        4.1 la page cours contient un formulaire qui permet d'ajouter un cours(Cours,discipline,nombre max d'eleve , date Debut,date Fin) fait
+        4.2 des page personaliser pour chacun des cours  pas fini
+    
+    5. creer une page professeur qui vas lister les professeurs du colleges fait
+
+        5.1 lister les prof avec luer image et les cours qu'il donnent. fait
+        5.2 utiliser des composant "Card" pour chaque prof de la listerfait
+        5.3 il y a un formulaire qui permet d'ajouter des prof avec (une date d’embauche, un nom, un pr´enom, une photo)  fait
+
+
+
+
+
+
+
+
+journal Chems : 
+    L'équipe au complet a commencé le travail le mardi 7 mars. 
+
+    Nous étions tous les trois en appel pour créer et initialiser le répertoire Git.
+
+    pour la programmation on a utiliser "visual studio code" avec l'aide de la fonctionnalitees "live share" depuis l'ordinateur de diego ou lucas une bonne parti du temps 
+    c'est pour cela que la pluspart des commits sont de chez eux . 
+
+    Moi j'ai programmer la page  cours et ajouterCours j'ai aussi aider lucas a faire ajouterProf
+    
+    Le 12-13 mars :
+        le 12 mars : les 3 membre de l'equipe on etait en appel et on fesais de la programmation sur l'ordinateur de diego et/ou lucas l'appel a durer 5h
+        le 12 mars : le soir je me suis mis sur la page cours et le formulaire ajouterCours j'ai mis un total de 4h (avec pause) j'ai fini le 13 mars a 2h am.
+
+    Le 15 mars : avec l'equipe on a finalisee le tp on a aussi fait le css afin de rendre le site utilisable. 3h-4h
+
+journal Lucas : 
+
+    j'ai commence le travail le 7 mars avec mes coequipier. Nous avions travailler pendant un bon 4 h cette soire.
+    
+    j'ai principalement coder le menu de navigation, les components professeur et cours, les fonction ajouterProf et ajouterCours. 
+    On s'est beaucoup entraider tous au long du travail alors, on a bien toucher a tous les sujets du travail.
+    
+    7 mars : 4 h de travail
+    9 mars : 3 h de travail
+    11 mars : 3 h de travail
+    12 mars environt 5h de travail
+    14 et 15 mars environt 3h chaque jours
+    
+    voila un enviornt des journer que j'ai travailler environt.
+    
+journal Diego: 
+    7 Mars : 1h travail sur la page d’accueil le soir et la navigation
+    9 Mars : 3h de travail sur la page professeur
+    11 Mars : travail le matin 1 ou 2 heures, avant d'aller au travail à 17h00 
+    12 Mars : 2 heures de travail (car, je suis aller au travail mais le reste de l'équipe a travaillé)
+    14 Mars : 3 heures
+    15 Mars : environ 5 heures
+    
+     

@@ -1,0 +1,51 @@
+.AjouterCours_controls {
+  text-align: center;
+  position: relative;
+  margin: 2rem auto 0 auto;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow: hidden;
+  background: #0E8388;
+  max-width: 600px;
+}
+
+.AjouterCours_controls input {
+
+  border: none;
+  border-radius: 3px;
+  padding: 0.5rem;
+  background: #CBE4DE;
+}
+
+.AjouterCours_action {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background: #2E4F4F;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.AjouterCours_action:hover {
+  background: #2E4F4F;
+}
+
+.AjouterCours_button:hover {
+  background: #2E4F4F;
+}
+
+.AjouterCours_button {
+  background: #2E4F4F;
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background: #2C3333;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
