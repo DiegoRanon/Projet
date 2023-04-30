@@ -1,10 +1,10 @@
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
-import ListeProfesseurs from "../components/Professeur/ListeProfesseurs";
-import AjouterProf from "../formulaire/AjouterProf";
+import ListeEtudiants from "../components/Etudiant/ListeEtudiants";
+import AjouterEtud from "../formulaire/AjouterEtud";
 
-function Professeurs() {
-  const [professeurs, setProfesseur] = useState([
+function Etudiants() {
+  const [etudiants, setEtudiant] = useState([
     {
       id: "P1",
       dateEmbauche: "1/09/2002",
@@ -34,17 +34,17 @@ function Professeurs() {
     },
   ]);
 
-  function ajouterProf(nouveauProf) {
-    setProfesseur(() => professeurs.concat(nouveauProf));
+  function ajouterEtud(nouveauEtud) {
+    setEtudiant(() => etudiants.concat(nouveauEtud));
 
   }
 
   return (
     <div>
-      <ListeProfesseurs professeurs={professeurs} />
-      <AjouterProf ajouterProf={ajouterProf} />
+      <ListeEtud etudiants={etudiants} />
+      <AjouterEtud ajouterEtud={ajouterEtud} />
     </div>
   );
 }
 
-export default Professeurs;
+export default Etudiants;

@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import LesCours from "../pages/LesCours";
-import Professeurs from "../pages/Professeurs";
+import Professeurs from "../pages/Etudiants";
 import MainNavigation from "../shared/Navigation/MainNavigation";
 import Acceuil from "../pages/Acceuil";
 
