@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../style/Etudiant.css"
-import Card from "./components/Card";
-import Profile from "./components/Profile";
+import Card from "../Professeur/components/Card";
+import Profile from "../Professeur/components/Profile";
 
-function Etudiant({ professeur }) {
+function Etudiant({ etudiant }) {
   return (
     <li className="user-item">
       <Card className="user-item__content">
@@ -26,4 +26,4 @@ function Etudiant({ professeur }) {
   );
 }
 
-export default Professeur;
+export default Etudiant;

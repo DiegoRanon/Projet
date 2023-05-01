@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/listeEtudiant.css";
-import Professeur from "./Etudiant";
-import Card from "./components/Card";
+import Etudiant from "./Etudiant";
+import Card from "../Professeur/components/Card";
 
 
 function ListeEtudiant(props) {
@@ -18,12 +18,12 @@ function ListeEtudiant(props) {
   return (
     <ul className="users-list">
       {props.etudiant.map((etudiant) => (
-        <Etudiants key={etudiant.id} etudiant={etudiant} />
+        <Etudiant key={etudiant.id} etudiant={etudiant} />
       ))}
     </ul>
   );
 }
 
-export default ListeEtudiants;
+export default ListeEtudiant;
 
 

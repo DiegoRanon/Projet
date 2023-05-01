@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
-import ListeEtudiants from "../components/Etudiant/ListeEtudiants";
+import ListeEtudiants from "../components/Etudiant/ListeEtudiant";
 import AjouterEtud from "../formulaire/AjouterEtud";
 
 function Etudiants() {
@@ -41,7 +41,7 @@ function Etudiants() {
 
   return (
     <div>
-      <ListeEtud etudiants={etudiants} />
+      <ListeEtudiants etudiants={etudiants} />
       <AjouterEtud ajouterEtud={ajouterEtud} />
     </div>
   );
