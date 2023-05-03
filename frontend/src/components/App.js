@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import LesCours from "../pages/LesCours";
-import Professeurs from "../pages/Etudiants";
+import Etudiants from "../pages/Etudiants";
 import MainNavigation from "../shared/Navigation/MainNavigation";
 import Acceuil from "../pages/Acceuil";
 
@@ -23,8 +23,8 @@ function App() {
           <Route path="/" exact>
             <Acceuil />
           </Route>
-          <Route path="/professeur" exact>
-            <Professeurs />
+          <Route path="/etudiants" exact>
+            <Etudiants />
           </Route>
           <Route path="/cours/:id" exact>
             <LesCours />

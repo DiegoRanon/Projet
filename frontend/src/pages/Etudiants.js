@@ -1,13 +1,13 @@
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
 import ListeEtudiants from "../components/Etudiant/ListeEtudiant";
-import AjouterEtud from "../formulaire/AjouterEtud";
+import AjouterEtud from "../formulaire/AjouterEtudiant";
 
 function Etudiants() {
   const [etudiants, setEtudiant] = useState([
     {
       id: "P1",
-      dateEmbauche: "1/09/2002",
+      courielle: "blblblb@fish.com",
       nom: "Sylvain",
       prenom: "Labranche",
       image:
@@ -16,7 +16,7 @@ function Etudiants() {
     },
     {
       id: "P2",
-      dateEmbauche: "2/01/2003",
+      courielle: "blblblb@fish.com",
       nom: "Bergeron",
       prenom: "Mathieu",
       image:
@@ -25,7 +25,7 @@ function Etudiants() {
     },
     {
       id: "P3",
-      dateEmbauche: "31/08/2005",
+      courielle: "blblblb@fish.com",
       nom: "Deschênes",
       prenom: "Simon",
       image:

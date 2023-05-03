@@ -16,7 +16,7 @@ function Etudiant({ etudiant }) {
           <div className="user-item__info">
             <h2>{etudiant.nom + " " + etudiant.prenom}</h2>
             <h5>{"Cours : " + etudiant.Cours }</h5>
-            <h3>{"Date d'Embauche: " + etudiant.dateEmbauche} </h3>
+            <h3>{"Courielle: " + etudiant.courielle} </h3>
           </div>
 
 

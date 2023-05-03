@@ -17,7 +17,7 @@ function ListeEtudiant(props) {
 
   return (
     <ul className="users-list">
-      {props.etudiant.map((etudiant) => (
+      {props.etudiants.map((etudiant) => (
         <Etudiant key={etudiant.id} etudiant={etudiant} />
       ))}
     </ul>
