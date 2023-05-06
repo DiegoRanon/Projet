@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useParams } from "react-router-dom";
-import ListeCours from "../components/Cours/ListeCours";
-import AjouterCours from "../formulaire/AjouterCours";
-import FiltrageCours from "../components/Filtrage/FiltrageCours";
+import ListeCours from "../../../components/Cours/ListeCours";
+import AjouterCours from "../../../formulaire/AjouterCours";
+import FiltrageCours from "../../../components/Filtrage/FiltrageCours";
 
 function LesCours() {
    const [filteredSession, setFilteredSession] = useState("session 4");

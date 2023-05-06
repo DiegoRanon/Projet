@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
-import ListeEtudiants from "../components/Etudiant/ListeEtudiant";
-import AjouterEtud from "../formulaire/AjouterEtudiant";
+import ListeEtudiants from "../../../components/Etudiant/ListeEtudiant";
+import AjouterEtud from "../../../formulaire/AjouterEtudiant";
 
 function Etudiants() {
   const [etudiants, setEtudiant] = useState([

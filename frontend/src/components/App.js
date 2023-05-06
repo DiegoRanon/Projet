@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState, useCallback} from "react";
 
 import "../style/App.css";
-import logo from "../assets/Logomomo.png";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch,
+  Switch
 } from "react-router-dom";
 
-import LesCours from "../pages/LesCours";
-import Etudiants from "../pages/Etudiants";
+
 import MainNavigation from "../shared/Navigation/MainNavigation";
-import Acceuil from "../pages/Acceuil";
+import Acceuil from "../shared/user/pages/Acceuil";
+import Faq from "../shared/user/pages/Faq"
+
+import { AuthContext } from '../shared/context/auth-context';
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false);
+
+  const login = useCallback((userId) => {
+    setIsLoggedIn(true);
+    setUserId(userId);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setUserId(null);
+  }, []);
+
+  let routes;
+
+
+
+
   return (
     <Router>
       <MainNavigation />
@@ -23,11 +43,14 @@ function App() {
           <Route path="/" exact>
             <Acceuil />
           </Route>
-          <Route path="/etudiants" exact>
-            <Etudiants />
+          <Route path="/deroulementStageEmployeurs" exact>
           </Route>
-          <Route path="/cours/:id" exact>
-            <LesCours />
+          <Route path="/profil-competence-stagiaires" exact>
+          </Route>
+          <Route path="/deroulementStageEtudiant" exact>
+          </Route>
+          <Route path="/FAQ" exact>
+          <Faq />
           </Route>
           <Redirect to="/" />
         </Switch>

@@ -9,10 +9,18 @@ function NavLinks(props) {
       <NavLink to="/" exact>Acceuil</NavLink>
     </li>
     <li>
-      <NavLink to="/cours/:id">Les cours</NavLink>
+      <NavLink to="/deroulementStageEmployeurs">Déroulement des stages  (Employeurs)</NavLink>
     </li>
     <li>
-      <NavLink to="/etudiants">Les étudiants</NavLink>
+      <NavLink to="/profil-competence-stagiaires">Profils et compétences des stagiaires</NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/deroulementStageEtudiant">Déroulement des stages (Etudiants) </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/faq">FAQ</NavLink>
     </li>
   </ul>
 };
