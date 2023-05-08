@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 
-function Acceuil() {
+function Faq() {
   return (
     <div className="App">
       <header className="App-header">
@@ -25,4 +25,4 @@ function Acceuil() {
   );
 }
 
-export default Acceuil;
+export default Faq;
