@@ -1,28 +1,44 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import './NavLinks.css';
+import "./NavLinks.css";
 
 function NavLinks(props) {
-  return <ul className="nav-links">
-    <li>
-      <NavLink to="/" exact>Acceuil</NavLink>
-    </li>
-    <li>
-      <NavLink to="/deroulementStageEmployeurs">Déroulement des stages  (Employeurs)</NavLink>
-    </li>
-    <li>
-      <NavLink to="/profil-competence-stagiaires">Profils et compétences des stagiaires</NavLink>
-    </li>
+  return (
+    <ul className="nav-links">
+      <li>
+        <NavLink to="/" exact>
+          Acceuil
+        </NavLink>
+      </li>
+      <li className="hover-link">
+        <a>Stages</a>
+        <ul className="sub-links">
+          <li>
+            <NavLink to="/stage/directive-etudiant">Directive Étudiant</NavLink>
+          </li>
+          <li>
+            <NavLink to="/stage/directive-employeur">Directive Employeur</NavLink>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <NavLink to="/profil-competence-stagiaires">
+          Profils et compétences des stagiaires
+        </NavLink>
+      </li>
 
-    <li>
-      <NavLink to="/deroulementStageEtudiant">Déroulement des stages (Etudiants) </NavLink>
-    </li>
+      <li>
+        <NavLink to="/faq">FAQ</NavLink>
+      </li>
 
-    <li>
-      <NavLink to="/faq">FAQ</NavLink>
-    </li>
-  </ul>
-};
+      <li>
+        <NavLink to="/faq">Connexion</NavLink>
+      </li>
+
+
+    </ul>
+  );
+}
 
 export default NavLinks;

@@ -32,7 +32,7 @@
   padding: 12px 14px;
   text-align: center;
   text-rendering: geometricprecision;
-  text-transform: none;
+  text-transform:capitalize;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -65,4 +65,12 @@
   }
 
 
+}
+
+.hover-link .sub-links {
+  display: none;
+}
+
+.hover-link:hover .sub-links {
+  display:grid; 
 }

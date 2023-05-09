@@ -12,9 +12,12 @@ import {
 import MainNavigation from "../shared/Navigation/MainNavigation";
 import Acceuil from "../shared/user/pages/Acceuil";
 import Faq from "../shared/user/pages/Faq";
-import profilEtCompetence from "../shared/user/pages/profilsEtCompetencesDesStagiaires";
+import ProfilEtCompetence from "../shared/user/pages/ProfilsEtCompetencesDesStagiaires";
 
 import { AuthContext } from '../shared/context/auth-context';
+import DirectiveEtudiant from "../shared/user/pages/DirectiveEtudiant";
+
+import Connexion from "../shared/user/pages/Connexion";
 
 
 function App() {
@@ -44,16 +47,24 @@ function App() {
           <Route path="/" exact>
             <Acceuil />
           </Route>
-          <Route path="/deroulementStageEmployeurs" exact>
+
+          <Route path="/stage/directive-etudiant">
+            <DirectiveEtudiant />
           </Route>
+
+          <Route path="/stage/directive-employeur">
+
+          </Route>
+          
           <Route path="/profil-competence-stagiaires" exact>
-            <profilEtCompetence></profilEtCompetence>
-          </Route>
-          <Route path="/deroulementStageEtudiant" exact>
-            
+            <ProfilEtCompetence />
           </Route>
           <Route path="/FAQ" exact>
             <Faq />
+          </Route>
+
+          <Route path="/connexion" exact>
+          <Connexion />
           </Route>
           <Redirect to="/" />
         </Switch>

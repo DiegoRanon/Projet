@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-function profilEtCompetence() {
+function ProfilEtCompetence() {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,4 +20,4 @@ function profilEtCompetence() {
   );
 }
 
-export default profilEtCompetence;
+export default ProfilEtCompetence;
