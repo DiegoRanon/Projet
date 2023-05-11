@@ -14,13 +14,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: grey;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(8px + 2vmin);
+  color: #F1F0F1;
 }
 
 .App-link {
@@ -35,4 +35,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.carteProfile {
+  background-color: #F1F0F1;
+  color: #7D7B74;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 100px;
+  max-width: 1000px;
+  max-height: 700px;
+}
+
+.titre-reseaux {
+  background-color: #548BB2;
+  color: #F1F0F1;
+}
+
+.titre-développement {
+  background-color: #786A6B;
+  color: #F1F0F1;
 }

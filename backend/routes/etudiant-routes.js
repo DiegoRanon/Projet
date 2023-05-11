@@ -1,7 +1,13 @@
 const express = require("express");
 
-const controleursUtilisateurs = require("../controllers/etudiant-controlleurs")
+const controleursEtudiant= require("../controllers/etudiant-controlleurs")
 const router = express.Router();
 
+
+router.get("/", controleursEtudiant.getEtudiants);
+
+router.post("/inscription", controleursEtudiant.inscription)
+
+router.post("/connexion", controleursEtudiant.connexion)
 
 module.exports = router;

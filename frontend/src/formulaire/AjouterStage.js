@@ -113,22 +113,101 @@ function AjouterCours({ ajouterCours }) {
       }
     }
     
-    return (
-      <form onSubmit={ajoutNouveauCoursHandler}>
-        <div className="AjouterCours_controls" >
-        <h2>Ajouter un cours</h2>
-        <br/> Cours :<input type="text" value={saisieCours} onChange={saisieCoursHandler}/> 
-        <br/>Discipline :<input type="text" value={saisieDiscipline} onChange={saisieDisciplineHandler}/>
-        <br/>Nombre maximal d'étudiant : <input type="number" min="1" max="30"value={saisieNbMaximalEtudiant} onChange={saisieNbMaxHandler}/> 
-        <br/> Date Début :<input type="date" value={saisieDateDebut} onChange={saisieDateDebutHandler}/> 
-        <br/> Date Fin :<input type="date" value={saisieDateFin} onChange={saisieDateFinHandler}/> 
-        <div className="boutonAjouter" > 
-        <button type="submit" className="AjouterCours_button" onSubmit={handleSubmit}> Ajouter le Cours</button>
-        </div> 
-        </div> 
-      </form>
-    );
+  
+    if (event.target.value != "") {
+      setValidationTypeStage(true);
+    } else {
+      setValidationTypeStage(false);
+    }
   }
-  
-  export default AjouterCours;
-  
+  function setSaisieNombre(event) {
+    setSaisieNombre(event.target.value.toString());
+    if (event.target.value != 0) {
+      setSaisieNombre(true);
+    } else {
+      setSaisieNombre(false);
+    }
+  }
+
+  function setSaisieDescription(event) {
+    setSaisieDescription(event.target.value.toString());
+    if (event.target.value != "") {
+      setSaisieDescription(true);
+    } else {
+      setSaisieDescription(false);
+    }
+  }
+
+  const handleSubmit = (event) => {
+    if (validationDateDebut && validationDateFin) {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <form onSubmit={ajoutNouveauStageHandler}>
+      <div className="AjouterStage_controls">
+        <h2>Formulaire d'inscription de milieu de stage</h2>
+        <p>
+          Stages réguliers ayant lieu à la session hiver Les stages sont du 21
+          janvier au 3 mai 2019 (il est toutefois possible après entente avec le
+          coordonnateur de débuter le stage un peu plus tôt) Sur réception de ce
+          formulaire, le coordonnateur des stages entrera en contact avec le
+          responsable en entreprise pour discuter du stage. Veuillez vous
+          référez à la page Profil de sortie pour connaître le profil de sortie
+          et les compétences des étudiants.
+        </p>
+        <div></div>
+        <br /> Stage :
+        <input type="text" value={saisieStage} onChange={saisieStageHandler} />
+        <br />
+        Nom :<input type="text" value={saisieNom} onChange={saisieNomHandler} />
+        <br />
+        Courriel :{" "}
+        <input
+          type="text"
+          value={saisieCourriel}
+          onChange={saisieCourriel}
+        />
+        <br /> Telephone :
+        <input
+          type="text"
+          value={saisieTelephone}
+          onChange={saisieTelephoneHandler}
+        />
+        <br /> Type de stage:
+        <input
+          type="text"
+          value={saisieTypeStage}
+          onChange={saisieTypeStageHandler}
+        />
+        <br /> Nombre de poste:
+        <input type="int" value={saisieNombre} onChange={saisieNombreHandler} />
+        <br /> Nom de l'entreprise:
+        <input
+          type="text"
+          value={saisieNomEntreprise}
+          onChange={saisieNomEntrepriseHandler}
+        />
+        <br /> Description du stage:
+        <input
+          type="text"
+          value={saisieDescription}
+          onChange={saisieDescriptionHandler}
+        />
+        <div className="boutonAjouter">
+          <button
+            type="submit"
+            className="AjouterStage_button"
+            onSubmit={handleSubmit}
+          >
+            {" "}
+            Ajouter le Stage
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+export default AjouterStage;

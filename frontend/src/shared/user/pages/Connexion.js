@@ -1,18 +1,18 @@
 import React, { useState, useContext } from "react";
 
-import Card from "../components/UIElements/Card";
-import Input from "../components/FormElements/Input";
-import Button from "../components/FormElements/Button";
-import ErrorModal from "../components/UIElements/ErrorModal";
+import Card from "../../components/UIElements/Card";
+import Input from "../../components/FormElements/Input";
+import Button from "../../components/FormElements/Button";
+import ErrorModal from "../../components/UIElements/ErrorModal";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/util/validators";
-import { useForm } from "../hooks/form-hook";
-import { useHttpClient } from "../hooks/http-hook";
-import { AuthContext } from "../context/auth-context";
-import "./Auth.css";
+} from "../../util/validators";
+import { useForm } from "../../hooks/form-hook";
+import { useHttpClient } from "../../hooks/http-hook";
+import { AuthContext } from "../../context/auth-context";
+import "../../../style/Auth.css";
 
 const Connexion = () => {
   const auth = useContext(AuthContext);
