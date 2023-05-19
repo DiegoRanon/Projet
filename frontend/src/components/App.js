@@ -17,89 +17,36 @@ import { AuthContext } from "../shared/context/auth-context";
 import DirectiveEtudiant from "../shared/user/pages/DirectiveEtudiant";
 import DirectiveEmployeur from "../shared/user/pages/DirectiveEmployeur";
 
-import Connexion from "../shared/user/pages/Connexion";
+
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(false);
 
-  const login = useCallback((userId) => {
-    setIsLoggedIn(true);
-    setUserId(userId);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUserId(null);
-  }, []);
-
-  let routes;
-
-
-
-  if(isLoggedIn) {
-    routes =  (
-      <Switch>
-        <Route path="/" exact>
-          <Acceuil />
-        </Route>
-
-        <Route path="/stage/directive-etudiant">
-          <DirectiveEtudiant />
-        </Route>
-
-
-        <Route path="/profil-competence-stagiaires" exact>
-          <ProfilEtCompetence />
-        </Route>
-        <Route path="/FAQ" exact>
-          <Faq />
-        </Route>
-
-        <Route path="/connexion" exact>
-          <Connexion />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-
-  )
-  } else {
-    routes =  (
+  return (
+      <Router>
+        <MainNavigation />
+        <main>
         <Switch>
           <Route path="/" exact>
             <Acceuil />
           </Route>
-
           <Route path="/stage/directive-etudiant">
             <DirectiveEtudiant />
           </Route>
 
+          <Route path="/stage/directive-employeur">
+            <DirectiveEmployeur />
+          </Route>
 
           <Route path="/profil-competence-stagiaires" exact>
             <ProfilEtCompetence />
           </Route>
-          <Route path="/FAQ" exact>
+          <Route path="/faq" exact>
             <Faq />
-          </Route>
-
-          <Route path="/connexion" exact>
-            <Connexion />
           </Route>
           <Redirect to="/" />
         </Switch>
-
-    )
-  }
-
-  return (
-    <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, userId:userId, login: login, logout: logout }}
-    >
-      <Router>
-        <MainNavigation />
-        <main>{routes}</main>
+        </main>
       </Router>
-    </AuthContext.Provider>
   );
 }
 

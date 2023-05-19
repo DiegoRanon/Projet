@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-function DirectiveEtudiant() {
+function DirectiveEmpoyeur() {
   return (
     <div className="App">
       <header className="App-header">
@@ -24,4 +24,4 @@ function DirectiveEtudiant() {
   );
 }
 
-export default DirectiveEtudiant;
+export default DirectiveEmpoyeur;

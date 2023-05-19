@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-import { AuthContext } from "../context/auth-context";
 
 import "./NavLinks.css";
 
 function NavLinks(props) {
-  const auth = useContext(AuthContext);
   return (
     <ul className="nav-links">
       <li>
@@ -20,6 +18,12 @@ function NavLinks(props) {
           <li>
             <NavLink to="/stage/directive-etudiant">Directive Étudiant</NavLink>
           </li>
+
+          <li>
+            <NavLink to="/stage/directive-employeur">
+              Directive Employeur
+            </NavLink>
+          </li>
         </ul>
       </li>
       <li>
@@ -27,20 +31,9 @@ function NavLinks(props) {
           Profils et compétences des stagiaires
         </NavLink>
       </li>
-
       <li>
         <NavLink to="/faq">FAQ</NavLink>
       </li>
-      {!auth.isLoggedIn && (
-        <li>
-          <NavLink to="/connexion">Connexion</NavLink>
-        </li>
-      )}
-      {auth.isLoggedIn && (
-        <li>
-          <button onClick={auth.logout}>Déconnexion</button>
-        </li>
-      )}
     </ul>
   );
 }
