@@ -12,11 +12,11 @@ import MainNavigation from "../shared/Navigation/MainNavigation";
 import Acceuil from "../shared/user/pages/Acceuil";
 import Faq from "../shared/user/pages/Faq";
 import ProfilEtCompetence from "../shared/user/pages/ProfilsEtCompetencesDesStagiaires";
-
-import { AuthContext } from "../shared/context/auth-context";
 import DirectiveEtudiant from "../shared/user/pages/DirectiveEtudiant";
 import DirectiveEmployeur from "../shared/user/pages/DirectiveEmployeur";
-
+import AjouterStage from "../shared/user/pages/ajouterStage";
+import AjouterEtudiant from "../shared/user/pages/ajouterEtudiant";
+import Footer from "../shared/user/pages/Footer";
 
 
 function App() {
@@ -37,6 +37,16 @@ function App() {
             <DirectiveEmployeur />
           </Route>
 
+          <Route path="/stage/ajouter-etudiant">
+            <AjouterEtudiant />
+          </Route>
+
+          <Route path="/stage/ajouter-employeur">
+            <AjouterStage />
+          </Route>
+
+          
+
           <Route path="/profil-competence-stagiaires" exact>
             <ProfilEtCompetence />
           </Route>
@@ -45,6 +55,7 @@ function App() {
           </Route>
           <Redirect to="/" />
         </Switch>
+        <Footer />
         </main>
       </Router>
   );

@@ -1,4 +1,4 @@
-.AjouterCours_controls {
+.AjouterStage_controls {
   text-align: center;
   position: relative;
   margin: 2rem auto 0 auto;
@@ -9,7 +9,7 @@
   max-width: 600px;
 }
 
-.AjouterCours_controls input {
+.AjouterStage_controls input {
 
   border: none;
   border-radius: 3px;
@@ -17,7 +17,7 @@
   background: #CBE4DE;
 }
 
-.AjouterCours_action {
+.AjouterStage_action {
   margin-top: 1rem;
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -29,15 +29,15 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.AjouterCours_action:hover {
+.AjouterStage_action:hover {
   background: #2E4F4F;
 }
 
-.AjouterCours_button:hover {
+.AjouterStage_button:hover {
   background: #2E4F4F;
 }
 
-.AjouterCours_button {
+.AjouterStage_button {
   background: #2E4F4F;
   margin-top: 1rem;
   display: inline-block;

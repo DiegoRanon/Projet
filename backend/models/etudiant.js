@@ -8,8 +8,8 @@ const etudiantSchema = new Schema({
     nom: {type: String, required: true, unique:true},
     courriel: {type: String, required: true, minLength: 6},
     profil: {type: String, required: true},
-    motDePasse: {type: String, required: true, minLength: 6},
-    stagesPostule: [{type: mongoose.Types.ObjectId, required: true, ref:"Stage"}]
+    stagesPostule: [{type: mongoose.Types.ObjectId, required: true, ref:"Stage"}],
+    stage: {type: mongoose.Types.ObjectId, required: true, ref:"Stage"}
 });
 
 

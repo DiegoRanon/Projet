@@ -1,15 +1,15 @@
 import React from "react";
-import Cours from "./Cours";
+import Stage from "./Stage";
 import Card from "./components/Card";
 
-function ListeCours(props) {
+function ListeStage(props) {
   
 
-  if (props.cours.length === 0) {
+  if (props.stages.length === 0) {
     return (
       <div className="center">
         <Card>
-          <h2>Aucun cours</h2>
+          <h2>Aucun stage</h2>
         </Card>
       </div>
     );
@@ -17,9 +17,9 @@ function ListeCours(props) {
 
   return (
     <ul className="cours-list">
-      {props.cours.map((cours) => (
+      {props.stages.map((stage) => (
 
-        <Cours key={cours.id} cours={cours} />
+        <Stage key={stage.id} stage={stage} />
 
 
       ))}
@@ -27,6 +27,6 @@ function ListeCours(props) {
   );
 }
 
-export default ListeCours;
+export default ListeStage;
 
 

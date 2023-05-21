@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/listeEtudiant.css";
 import Etudiant from "./Etudiant";
-import Card from "../Professeur/components/Card";
+import Card from "../Etudiant/components/Card";
 
 
 function ListeEtudiant(props) {

@@ -13,15 +13,30 @@ function NavLinks(props) {
         </NavLink>
       </li>
       <li className="hover-link">
-        <a>Stages</a>
+        <a>Stages Etudiant</a>
         <ul className="sub-links">
           <li>
             <NavLink to="/stage/directive-etudiant">Directive Étudiant</NavLink>
           </li>
 
           <li>
-            <NavLink to="/stage/directive-employeur">
-              Directive Employeur
+            <NavLink to="/stage/ajouter-etudiant">
+              Liste Étudiants
+            </NavLink>
+          </li>
+        </ul>
+      </li>
+      
+      <li className="hover-link">
+        <a>Stages Employeur</a>
+        <ul className="sub-links">
+          <li>
+            <NavLink to="/stage/directive-employeur">Directive Employeur</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/stage/ajouter-employeur">
+              Publier Stage
             </NavLink>
           </li>
         </ul>
