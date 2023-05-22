@@ -12,6 +12,7 @@ function MainNavigation(props) {
 
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
 
+  
   const ouvrirTiroir = () => {
     setTiroirOuvert(true);
   };
@@ -23,10 +24,18 @@ function MainNavigation(props) {
 
 
   return (
-    <React.Fragment>
-      <MainHeader>
 
-        <button className="main-navigation__menu-btn" onClick={ouvrirTiroir}>
+    <React.Fragment>
+     {tiroirOuvert && <Backdrop onClick={fermerTiroir} />}
+      <SideDrawer show={tiroirOuvert} onClick={fermerTiroir}>
+        <nav className="main-navigation__drawer-nav">
+          <NavLinks />
+        </nav>
+      </SideDrawer> 
+
+
+      <MainHeader>  
+      <button onClick={ouvrirTiroir} className="main-navigation__menu-btn" >
           <span />
           <span />
           <span />

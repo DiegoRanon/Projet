@@ -1,39 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
-import { useHttpClient } from "../shared/hooks/http-hook";
-
-import "../style/AjouterEtudiant.css";
-function NouveauEtudiant({ ajouterEtudiant }) {
-
-  const { error, sendRequest, clearError } = useHttpClient();
+function UpdateEtudiant({ etudiants, onUpdateSuccess }) {
+  const { etudiantId } = useParams();
+  const etudiant = etudiants.find((etudiant) => etudiant.id === etudiantId);
+  console.log(etudiant);
+  const { sendRequest, error, clearError } = useHttpClient();
   // Validations
   const [validationDA, setValidationDA] = useState(false);
   const [validationNom, setValidationNom] = useState(false);
   const [validationcourriel, setValidationcourriel] = useState(false);
   const [validationProfil, setValidationProfil] = useState(false);
   // saisies
-  const [saisiecourriel, setSaisiecourriel] = useState("");
-  const [saisieNom, setSaisieNom] = useState("");
-  const [saisieDA, setSaisieDA] = useState("");
-  const [saisieProfil, setSaisieProfil] = useState("");
+  const [saisiecourriel, setSaisiecourriel] = useState(etudiant.courriel);
+  const [saisieNom, setSaisieNom] = useState(etudiant.nom);
+  const [saisieDA, setSaisieDA] = useState(etudiant.DA);
+  const [saisieProfil, setSaisieProfil] = useState(etudiant.profil);
 
-  const ajoutNouveauEtudiantHandler = async (event) => {
-    event.preventDefault();
-    if (validationDA && validationNom && validationcourriel && validationProfil) {
-      const nouveauEtudiant = {
-        DA: saisieDA,
-        nom: saisieNom,
-        courriel: saisiecourriel,
-        profil: saisieProfil,
-        stagesPostule: [],
-        stage: {}
-      };
-
+    const fetchEtudiant = async (event) => {
+        event.preventDefault();
       try {
-        const reponseData = await sendRequest(
-          "http://localhost:5000/etudiants/inscription",
-          "POST",
-          JSON.stringify({
+        const responseData = await sendRequest(`http://localhost:5000/etudiants/${etudiantId}`, "PATCH",
+        JSON.stringify({
             DA: saisieDA,
             nom: saisieNom,
             courriel: saisiecourriel,
@@ -42,19 +32,15 @@ function NouveauEtudiant({ ajouterEtudiant }) {
           {
             "Content-Type": "application/json",
           }
+        
         );
-
-        console.log(reponseData);
+        console.log(responseData);
       } catch (err) {
         console.log(err);
       }
+    };
 
-      ajouterEtudiant(nouveauEtudiant);
-
-      setSaisiecourriel("");
-      setSaisieNom("");
-    }
-  };
+    
 
   function saisiecourrielHandler(event) {
     setSaisiecourriel(event.target.value);
@@ -97,7 +83,9 @@ function NouveauEtudiant({ ajouterEtudiant }) {
   };
 
   return (
-    <form onSubmit={ajoutNouveauEtudiantHandler}>
+    <div>
+      <ErrorModal error={error} onClear={clearError} />
+      <form onSubmit={fetchEtudiant}>
       <div className="AjouterEtudiant_controls">
         <h2>Ajouter etudiant</h2>
         <br />
@@ -126,12 +114,13 @@ function NouveauEtudiant({ ajouterEtudiant }) {
             onSubmit={handleSubmit}
           >
             {" "}
-            Ajouter l'étudiant
+            Update Étudiant
           </button>
         </div>
       </div>
     </form>
+    </div>
   );
 }
 
-export default NouveauEtudiant;
+export default UpdateEtudiant;

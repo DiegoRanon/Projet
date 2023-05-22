@@ -6,8 +6,10 @@ const router = express.Router();
 
 router.get("/", controleursEmployeur.getEmployeurs);
 
-router.post("/inscription", controleursEmployeur.inscription)
+router.post("/inscription", controleursEmployeur.inscription);
 
-router.post("/connexion", controleursEmployeur.connexion)
+
+
+router.post("/connexion", controleursEmployeur.connexion);
 
 module.exports = router;

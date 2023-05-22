@@ -6,7 +6,7 @@ import NouveauStage from "../../../formulaire/NouveauStage";
 import ListeStage from "../../../components/Stage/ListeStage";
 import FiltrageStage from "../../../components/Filtrage/FiltrageStage";
 
-function AjouterStage() {
+function AsignerStage() {
   // Variables
   const [erreur, setErreur] = useState();
   const {error, sendRequest, clearError } = useHttpClient();
@@ -79,4 +79,4 @@ function AjouterStage() {
   );
 }
 
-export default AjouterStage;
+export default AsignerStage;

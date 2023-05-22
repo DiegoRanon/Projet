@@ -1,4 +1,18 @@
+.users-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 90%;
+  max-width: 50rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  gap: 1rem;
+}
+
 .user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 1rem;
   width: calc(60% - 2rem);
   min-width: 17.5rem;
@@ -11,7 +25,7 @@
   height: 100%;
   text-decoration: none;
   padding: 1rem;
-  color: white;
+  color: rgb(0, 0, 0);
   background: #2E4F4F;
 }
 

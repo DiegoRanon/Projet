@@ -9,7 +9,7 @@ const etudiantSchema = new Schema({
     courriel: {type: String, required: true, minLength: 6},
     profil: {type: String, required: true},
     stagesPostule: [{type: mongoose.Types.ObjectId, required: true, ref:"Stage"}],
-    stage: {type: mongoose.Types.ObjectId, required: true, ref:"Stage"}
+    stage: {type: mongoose.Types.ObjectId, required: false, ref:"Stage"}
 });
 
 

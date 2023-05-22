@@ -2,9 +2,13 @@ import React, { useState } from "react";
 
 import "../style/AjouterStage.css";
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { useHttpClient } from "../shared/hooks/http-hook";
 
 function NouveauStage({ ajouterStage }) {
+  // Variable supp
+  const { error, sendRequest, clearError } = useHttpClient();
+
   // Validateurs
   const [validationNomEntreprise, setValidationNomEntreprise] = useState(false);
   const [validationAdresseEntreprise, setValidationAdresseEntreprise] =
@@ -17,10 +21,12 @@ function NouveauStage({ ajouterStage }) {
     useState(false);
   const [validationTypeStage, setValidationTypeStage] = useState(false);
   const [validationRemuneration, setValidationRemuneration] = useState(false);
+  const [validationNumTel, setValidationNumTel] = useState(false);
 
   // Attributs Stage
   const [saisieNomEntreprise, setSaisieNomEntreprise] = useState("");
   const [saisieAdresseEntreprise, setSaisieAdresseEntreprise] = useState("");
+  const [saisieNumTel, setSaisieNumTel] = useState("");
   const [saisieRecruteur, setSaisieRecruteur] = useState("");
   const [saisieEmailRecruteur, setSaisieEmailRecruteur] = useState("");
   const [saisiePosteDispo, setSaisiePosteDispo] = useState("");
@@ -28,7 +34,7 @@ function NouveauStage({ ajouterStage }) {
   const [saisieTypeStage, setSaisieTypeStage] = useState("");
   const [saisieRemuneration, setSaisieRemuneration] = useState("");
 
-  function ajoutNouveauStageHandler(event) {
+  const ajoutNouveauStageHandler = async (event) => {
     event.preventDefault();
     if (
       validationNomEntreprise &&
@@ -41,15 +47,41 @@ function NouveauStage({ ajouterStage }) {
       validationRemuneration
     ) {
       const nouveauStage = {
-        nomRecruteur: saisieRecruteur,
-        emailRecruteur: saisieEmailRecruteur,
+        nom: saisieRecruteur,
+        courriel: saisieEmailRecruteur,
+        numeroTel: saisieNumTel,
         nomEntreprise: saisieNomEntreprise,
         adresseEntreprise: saisieAdresseEntreprise,
         typeStage: saisieTypeStage,
         nbPoste: saisiePosteDispo,
         descriptionStage: saisieDescriptionStage,
-        reumunerationStage:saisieRemuneration
+        reumunerationStage: saisieRemuneration,
       };
+
+      try {
+        const reponseData = await sendRequest(
+          "http://localhost:5000/stages/ajouterStage",
+          "POST",
+          JSON.stringify({
+            nom: saisieRecruteur,
+            courriel: saisieEmailRecruteur,
+            numeroTel: saisieNumTel,
+            nomEntreprise: saisieNomEntreprise,
+            adresseEntreprise: saisieAdresseEntreprise,
+            typeStage: saisieTypeStage,
+            nombreDePostesDispo: saisiePosteDispo,
+            descriptionStage: saisieDescriptionStage,
+            remuneration: saisieRemuneration,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+
+        console.log(reponseData);
+      } catch (err) {
+        console.log(err);
+      }
       ajouterStage(nouveauStage);
 
       setSaisieNomEntreprise("");
@@ -59,10 +91,8 @@ function NouveauStage({ ajouterStage }) {
       setSaisiePosteDispo("");
       setSaisieDescriptionStage("");
       setSaisieTypeStage("");
-
-
     }
-  }
+  };
 
   function saisieNomEntrepriseHandler(event) {
     setSaisieNomEntreprise(event.target.value);
@@ -136,6 +166,15 @@ function NouveauStage({ ajouterStage }) {
     }
   }
 
+  function saisieNumTelHandler(event) {
+    setSaisieNumTel(event.target.value);
+    if (event.target.value != "") {
+      setValidationNumTel(true);
+    } else {
+      setValidationNumTel(false);
+    }
+  }
+
   const handleSubmit = (event) => {
     if (
       validationNomEntreprise &&
@@ -144,7 +183,8 @@ function NouveauStage({ ajouterStage }) {
       validationEmailRecruteur &&
       validationPosteDispo &&
       validationDescriptionStage &&
-      validationTypeStage
+      validationTypeStage &&
+      validationNumTel
     ) {
       event.preventDefault();
     }
@@ -166,6 +206,13 @@ function NouveauStage({ ajouterStage }) {
           type="text"
           value={saisieEmailRecruteur}
           onChange={saisieEmailRecruteurHandler}
+        />
+        <br />
+        Numéro de téléphone de la personne contact:{" "}
+        <input
+          type="text"
+          value={saisieNumTel}
+          onChange={saisieNumTelHandler}
         />
         <br /> Nom de l'entreprise:
         <input
@@ -197,13 +244,13 @@ function NouveauStage({ ajouterStage }) {
           value={saisieDescriptionStage}
           onChange={saisieDescriptionHandler}
         />
-        <br /> Rémunération (salaire horaire, montant unique pour le stage ou aucune rémunération):
+        <br /> Rémunération (salaire horaire, montant unique pour le stage ou
+        aucune rémunération):
         <input
           type="text"
           value={saisieRemuneration}
           onChange={saisieRemunerationHandler}
         />
-
         <div className="boutonAjouter">
           <button
             type="submit"

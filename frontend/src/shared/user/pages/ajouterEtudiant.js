@@ -1,34 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import ReactDOM from "react-dom";
-
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ListeEtudiant from "../../../components/Etudiant/ListeEtudiant";
 import NouveauEtudiant from "../../../formulaire/NouveauEtudiant";
 import FiltrageEtudiants from "../../../components/Filtrage/FiltrageEtudiants";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
+import UpdateEtudiant from "../../../shared/user/pages/UpdateEtudiant";
 
 function AjouterEtudiant() {
+  // Variables
+  const [erreur, setErreur] = useState();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [filteredEtudiants, setfilteredEtudiants] = useState("etudiants");
+  const [etudiants, setEtudiants] = useState([]);
+  const etudiantId = useParams().etudiantId;
+  const [deletedEtudiantId, setDeletedEtudiantId] = useState(null);
+  const [selectedEtudiant, setSelectedEtudiant] = useState(null);
+  const history = useHistory();
 
+  // Méthodes
   const filterChangeHandler = (selectedOption) => {
     setfilteredEtudiants(selectedOption);
   };
 
-  const [etudiants, setEtudiants] = useState([{
-    DA:"2040616",
-    nom:"Diego",
-    courriel:"2040616@cmontmorency.qc.ca",
-    profilSortie:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg", 
-    stagesPostule:[],
-    stage: ""
-  }, 
-  {
-    DA:"2040333",
-    nom:"Lucas",
-    courriel:"2040616@cmontmorency.qc.ca",
-    profilSortie:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg", 
-    stagesPostule:["iasdfiasofoisdf"],
-    stage: ""
-  }
-]);
+  const deleteEtudiant = async (etudiantId) => {
+    try {
+      await sendRequest(
+        `http://localhost:5000/etudiants/${etudiantId}`,
+        "DELETE"
+      );
+      setDeletedEtudiantId(etudiantId);
+    } catch (err) {
+      // Handle any errors
+    }
+  };
+
+  const assignerStage = (etudiantId) => {
+    history.push(`/update-etudiant/${etudiantId}`);
+  };
+
+  const editEtudiant = (etudiantId) => {
+    const selected = etudiants.find((etudiant) => etudiant.id === etudiantId);
+    setSelectedEtudiant(selected);
+    history.push(`/update-etudiant/${etudiantId}`);
+  };
 
   function ajouterEtudiant(nouveauEtudiant) {
     setEtudiants(() => etudiants.concat(nouveauEtudiant));
@@ -37,19 +53,58 @@ function AjouterEtudiant() {
   const etudiantFiltrees = etudiants.filter((etudiant) => {
     if (filteredEtudiants == "etudiants") {
       return etudiants;
-    } else if(filteredEtudiants == "etudiantsRechercheStage") {
+    } else if (filteredEtudiants == "etudiantsRechercheStage") {
       return etudiant.stagesPostule.length > 0;
     }
   });
 
+  useEffect(() => {
+    const recupererEtudiants = async () => {
+      try {
+        const reponseData = await sendRequest(
+          "http://localhost:5000/etudiants"
+        );
+
+        setEtudiants(reponseData.etudiants);
+      } catch (err) {}
+    };
+    recupererEtudiants();
+  }, [sendRequest]);
+
+  useEffect(() => {
+    if (deletedEtudiantId) {
+      setEtudiants((prevEtudiants) =>
+        prevEtudiants.filter((etudiant) => etudiant.id !== deletedEtudiantId)
+      );
+      setDeletedEtudiantId(null);
+    }
+  }, [deletedEtudiantId]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <FiltrageEtudiants 
-        selected={filteredEtudiants}
-        onChangementFiltre={filterChangeHandler} />
-        <ListeEtudiant etudiants={etudiantFiltrees} />
-        <NouveauEtudiant ajouterEtudiant={ajouterEtudiant} />
+        <React.Fragment>
+          <ErrorModal error={error} onClear={clearError} />
+          <FiltrageEtudiants
+            selected={filteredEtudiants}
+            onChangementFiltre={filterChangeHandler}
+          />
+          {etudiants && (
+            <ListeEtudiant
+              etudiants={etudiantFiltrees}
+              onDeleteEtudiant={deleteEtudiant}
+              onEditEtudiant={editEtudiant}
+              onAssignerStage={assignerStage}
+            />
+          )}
+          {selectedEtudiant && (
+            <UpdateEtudiant
+              etudiants={etudiants}
+              onUpdateSuccess={() => setSelectedEtudiant(null)}
+            />
+          )}
+          <NouveauEtudiant ajouterEtudiant={ajouterEtudiant} />
+        </React.Fragment>
       </header>
     </div>
   );

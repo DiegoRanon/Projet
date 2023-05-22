@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../../style/Etudiant.css";
 import Card from "../Etudiant/components/Card";
 import Profile from "../Etudiant/components/Profile";
@@ -8,33 +8,59 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import Map from "../../shared/components/UIElements/Map";
+import { useForm } from '../../shared/hooks/form-hook';
 
 function Etudiant({ etudiant }) {
   const { error, sendRequest, clearError } = useHttpClient();
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const history = useHistory();
 
-  const openMapHandler = () => setShowMap(true);
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      title: {
+        value: '',
+        isValid: false
+      },
+      description: {
+        value: '',
+        isValid: false
+      }
+    },
+    false
+  );
+
   const closeMapHandler = () => setShowMap(false);
-
-  const showDeleteWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
-
-  const cancelDeleteHandler = () => {
-    setShowConfirmModal(false);
-  };
 
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${etudiant.id}`,
+        `http://localhost:5000/etudiants/${etudiant.id}`,
         "DELETE"
       );
       etudiant.onDelete(etudiant.id);
+    } catch (err) {
+    }
+  };
+
+  const etudiantUpdateSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+      await sendRequest(
+        `http://localhost:5000/etudiants/${etudiant.id}`,
+        "PATCH",
+        JSON.stringify({
+          titre: formState.inputs.title.value,
+          description: formState.inputs.description.value,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
     } catch (err) {}
   };
+
   return (
     <React.Fragment>
       <li className="user-item">
@@ -51,52 +77,18 @@ function Etudiant({ etudiant }) {
             <Map center={etudiant.DA} zoom={16} />
           </div>
         </Modal>
-        <Modal
-          show={showConfirmModal}
-          onCancel={cancelDeleteHandler}
-          header="Are you sure?"
-          footerClass="place-item__modal-actions"
-          footer={
-            <React.Fragment>
-              <Button inverse onClick={cancelDeleteHandler}>
-                Annuler
-              </Button>
-              <Button danger onClick={confirmDeleteHandler}>
-                Supprimer
-              </Button>
-            </React.Fragment>
-          }
-        >
-          <p>
-            Do you want to proceed and delete this place? Please note that it
-            can't be undone thereafter.
-          </p>
-        </Modal>
         <Card className="user-item__content">
-          <div className="user-item__image">
-            <Profile image={etudiant.profilSortie} alt={etudiant.nom} />
-          </div>
 
           <div className="user-item__info">
             <h2>{etudiant.nom}</h2>
             <h3>{"Numéro de DA de l'étudiant: " + etudiant.DA}</h3>
             <h3>{"Nom de l'étudiant: " + etudiant.nom} </h3>
             <h3>{"Courriel de l'étudiant: " + etudiant.courriel} </h3>
-          </div>
-          <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}>
-              Assigner à un stage
-            </Button>
-            <Button to={`/etudiants/${etudiant.id}`}>Modifier</Button>
-
-            <Button danger onClick={showDeleteWarningHandler}>
-              Supprimer
-            </Button>
+            <h3>{"Profil de sortie: " + etudiant.profil} </h3>
           </div>
         </Card>
       </li>
     </React.Fragment>
-  );
-}
+  );}
 
 export default Etudiant;

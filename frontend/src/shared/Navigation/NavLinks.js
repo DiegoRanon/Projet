@@ -35,7 +35,7 @@ function NavLinks(props) {
           </li>
 
           <li>
-            <NavLink to="/stage/ajouter-employeur">
+            <NavLink to="/stage/ajouter-stage">
               Publier Stage
             </NavLink>
           </li>

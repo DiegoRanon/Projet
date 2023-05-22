@@ -1,10 +1,85 @@
 .users-list {
-  list-style: none;
-  margin: 0 auto;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 0;
-  width: 90%;
-  max-width: 50rem;
+}
+
+.users-list-solo {
+  background-color: #dbdbdb;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  
+}
+
+.users-list-solo .card-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.users-list-solo .card-content {
+  margin-bottom: 10px;
+}
+
+.users-list-solo .card-actions {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+}
+
+.users-list-solo .card-actions .ButtonList {
+  margin-right: 10px;
+}
+
+
+
+.ButtonList {
+  text-align: center;
+  font: inherit;
+  padding: 1px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3d6d6d;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.ButtonList:focus {
+  outline: none;
+}
+
+.ButtonList:hover,
+.ButtonList:active {
+  background-color: #2e4f4f9d;
+  color: #fff;
+}
+
+.ButtonList--inverse:hover,
+.ButtonList--inverse:active {
+  color: #fff;
+  background-color: #2e4f4f9d;
+}
+
+.ButtonList:disabled,
+.ButtonList:hover:disabled,
+.ButtonList:active:disabled {
+  background-color: #ccc;
+  color: #979797;
+  cursor: not-allowed;
+}
+
+.ButtonList--small {
+  font-size: 0.8rem;
+  padding: 0.5rem;
+}
+
+.ButtonList--big {
+  font-size: 1.5rem;
+  padding: 1.5rem;
 }

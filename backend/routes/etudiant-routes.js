@@ -4,10 +4,16 @@ const controleursEtudiant= require("../controllers/etudiant-controlleurs")
 const router = express.Router();
 
 
-router.get("/", controleursEtudiant.getEtudiants);
+router.get("/:etudiantId", controleursEtudiant.getEtudiantById);
+
+router.get("/", controleursEtudiant.getEtudiants)
 
 router.post("/inscription", controleursEtudiant.inscription)
 
-router.post("/connexion", controleursEtudiant.connexion)
+router.patch("/assignerStage/:etudiantId", controleursEtudiant.assignerStage);
+
+router.patch("/:etudiantId", controleursEtudiant.updateEtudiant);
+
+router.delete("/:etudiantId", controleursEtudiant.supprimerEtudiant)
 
 module.exports = router;

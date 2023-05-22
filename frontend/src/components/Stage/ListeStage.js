@@ -18,10 +18,12 @@ function ListeStage(props) {
   return (
     <ul className="cours-list">
       {props.stages.map((stage) => (
-
+        <div key={stage.id}>
         <Stage key={stage.id} stage={stage} />
-
-
+        <button onClick={() => props.onDeleteStage(stage.id)}>
+            Delete
+          </button>
+        </div>
       ))}
     </ul>
   );

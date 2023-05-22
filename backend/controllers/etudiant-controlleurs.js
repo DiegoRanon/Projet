@@ -5,6 +5,20 @@ const Etudiant = require("../models/etudiant");
 
 const ETUDIANTS = [];
 
+const getEtudiantById = async (requete, reponse, next) => {
+  const etudiantId = requete.params.etudiantId;
+  let etudiant;
+  try {
+    etudiant = await Etudiant.findById(etudiantId);
+  } catch (err) {
+    return next(new HttpErreur("Erreur lors de la récupération de l'étudiant", 500));
+  }
+  if (!etudiant) {
+    return next(new HttpErreur("Aucun étudiant trouvée pour l'id fourni", 404));
+  }
+  reponse.json({ etudiant: etudiant.toObject({ getters: true }) });
+};
+
 const getEtudiants = async (requete, reponse, next) => {
   let etudiants;
 
@@ -21,13 +35,29 @@ const getEtudiants = async (requete, reponse, next) => {
   });
 };
 
+const getEtudiantsById = async (requete, reponse, next) => {
+  let etudiants;
+
+  try {
+    etudiants = await Etudiant.find({}, "-motDePasse");
+  } catch {
+    return next(new HttpErreur("Erreur accès etudiant"), 500);
+  }
+
+  reponse.json({
+    etudiants: etudiants.map((etudiant) =>
+      etudiant.toObject({ getters: true })
+    ),
+  });
+};
+
 const inscription = async (requete, reponse, next) => {
-  const { nom, courriel, motDePasse } = requete.body;
+  const { DA, nom, courriel, profil } = requete.body;
 
   let etudiantExiste;
 
   try {
-    etudiantExiste = await etudiant.findOne({ courriel: courriel });
+    etudiantExiste = await Etudiant.findOne({ courriel: courriel });
   } catch {
     return next(new HttpErreur("Échec vérification etudiant existe", 500));
   }
@@ -39,12 +69,12 @@ const inscription = async (requete, reponse, next) => {
   }
 
   let nouveletudiant = new Etudiant({
-    DA: "",
+    DA,
     nom,
     courriel,
-    profil: "",
-    motDePasse,
-    stagesPostule: []
+    profil,
+    stagesPostule: [],
+    stage: undefined,
   });
   try {
     await nouveletudiant.save();
@@ -57,29 +87,70 @@ const inscription = async (requete, reponse, next) => {
     .json({ etudiant: nouveletudiant.toObject({ getter: true }) });
 };
 
-const connexion = async (requete, reponse, next) => {
-  const { courriel, motDePasse } = requete.body;
+const updateEtudiant = async (requete, reponse, next) => {
+  const { DA, nom, courriel, profil } = requete.body;
+  const etudiantId = requete.params.etudiantId;
 
-  let etudiantExiste;
+  let etudiant;
 
   try {
-    etudiantExiste = await Etudiant.findOne({ courriel: courriel });
-  } catch {
-    return next(
-      new HttpErreur("Connexion échouée, veuillez réessayer plus tard", 500)
-    );
+    etudiant = await Etudiant.findById(etudiantId);
+    etudiant.DA = DA;
+    etudiant.nom = nom;
+    etudiant.courriel = courriel;
+    etudiant.profil = profil;
+    await etudiant.save();
+  } catch (err) {
+    console.log(err);
+    return next(new HttpErreur("Erreur lors de l'ajout de l'étudiant", 422));
   }
-
-  if (!etudiantExiste || etudiantExiste.motDePasse !== motDePasse) {
-    return next(new HttpErreur("Courriel ou mot de passe incorrect", 401));
-  }
-
-  reponse.json({
-    message: "connexion réussie!",
-    etudiant: etudiantExiste.toObject({ getters: true }),
-  });
+  reponse.status(201).json({ etudiant: etudiant.toObject({ getter: true }) });
 };
 
+const assignerStage = async (requete, reponse, next) => {
+  const { stage } = requete.body;
+  const etudiantId = requete.params.etudiantId;
+
+  let etudiant;
+
+  try {
+    etudiant = await Etudiant.findById(etudiantId);
+    etudiant.stage = stage;
+    await etudiant.save();
+  } catch (err) {
+    console.log(err);
+    return next(new HttpErreur("Erreur lors de l'ajout de l'étudiant", 422));
+  }
+  reponse.status(201).json({ etudiant: etudiant.toObject({ getter: true }) });
+};
+
+const supprimerEtudiant = async (requete, reponse, next) => {
+  const etudiantId = requete.params.etudiantId;
+  let etudiant;
+  try {
+    etudiant = await Etudiant.findById(etudiantId);
+  } catch {
+    return next(
+      new HttpErreur("Erreur lors de la suppression de l'étudiant", 500)
+    );
+  }
+  if (!etudiant) {
+    return next(new HttpErreur("Impossible de trouver l'étudiant", 404));
+  }
+
+  try {
+    await etudiant.remove();
+  } catch {
+    return next(
+      new HttpErreur("Erreur lors de la suppression de l'étudiant'", 500)
+    );
+  }
+  reponse.status(200).json({ message: "Etudiant supprimée" });
+};
+
+exports.getEtudiantById = getEtudiantById;
 exports.getEtudiants = getEtudiants;
 exports.inscription = inscription;
-exports.connexion = connexion;
+exports.assignerStage = assignerStage;
+exports.updateEtudiant = updateEtudiant;
+exports.supprimerEtudiant = supprimerEtudiant;

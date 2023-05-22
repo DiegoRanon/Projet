@@ -5,7 +5,22 @@ const { v4: uuidv4 } = require("uuid");
 const HttpErreur = require("../models/http-erreur");
 
 const Stage = require("../models/stage");
-const Employeur = require("../models/employeur");
+
+const getStages = async (requete, reponse, next) => {
+  let stages;
+
+  try {
+    stages = await Stage.find({}, "-motDePasse");
+  } catch {
+    return next(new HttpErreur("Erreur accès etudiant"), 500);
+  }
+
+  reponse.json({
+    stages: stages.map((etudiant) =>
+      etudiant.toObject({ getters: true })
+    ),
+  });
+};
 
 const getStageById = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
@@ -21,81 +36,61 @@ const getStageById = async (requete, reponse, next) => {
   reponse.json({ stage: stage.toObject({ getters: true }) });
 };
 
-const getStagesByUserId = async (requete, reponse, next) => {
-  const employeurId = requete.params.employeurId;
 
-  let stages;
-  try {
-    let employeur = await Employeur.findById(employeurId).populate("stages");
 
-    stages = employeur.stages;
-    console.log(employeur);
-
-    //stages = await stage.find({ createur: employeurId });
-  } catch (err) {
-    return next(
-      new HttpErreur(
-        "Erreur lors de la récupération des stages de l'employeur",
-        500
-      )
-    );
-  }
-
-  if (!stages || stages.length === 0) {
-    return next(
-      new HttpErreur("Aucune stage trouvé pour l'employeur fourni", 404)
-    );
-  }
-
-  reponse.json({
-    stages: stages.map((stage) => stage.toObject({ getters: true })),
-  });
-};
 
 const creerStage = async (requete, reponse, next) => {
-  const { titre, description, adresse, createur } = requete.body;
+  const {
+    nom,
+    courriel,
+    numeroTel,
+    nomEntreprise,
+    adresseEntreprise,
+    typeStage,
+    nombreDePostesDispo,
+    descriptionStage,
+    remuneration
+  } = requete.body;
   const nouvelleStage = new Stage({
-    titre,
-    description,
-    adresse,
-    image:
-      "https://www.cmontmorency.qc.ca/wp-content/uploads/images/college/Porte_1_juin_2017-1024x683.jpg",
-    createur,
+    nom,
+    courriel,
+    numeroTel,
+    nomEntreprise,
+    adresseEntreprise,
+    typeStage,
+    nombreDePostesDispo,
+    descriptionStage,
+    remuneration,
+    etudiants:[]
   });
 
-  let employeur;
-
-  try {
-    employeur = await employeur.findById(createur);
-  } catch {
-    return next(new HttpErreur("Création de stage échouée", 500));
-  }
-
-  if (!employeur) {
-    return next(new HttpErreur("employeur non trouvé selon le id"), 504);
-  }
 
   try {
     await nouvelleStage.save();
-    employeur.stagesCreer.push(nouvelleStage);
-    await employeur.save();
   } catch (err) {
     const erreur = new HttpErreur("Création de stage échouée", 500);
     return next(erreur);
   }
-  reponse.status(201).json({ stage: nouvellestage });
+  reponse.status(201).json({ stage: nouvelleStage });
 };
 
 const updateStage = async (requete, reponse, next) => {
-  const { titre, description } = requete.body;
+  const { nom, courriel, numeroTel, nomEntreprise, adresseEntreprise, typeStage, nombreDePostesDispo, descriptionStage, remuneration } = requete.body;
   const stageId = requete.params.stageId;
 
   let stage;
 
   try {
     stage = await stage.findById(stageId);
-    stage.titre = titre;
-    stage.description = description;
+    stage.nom = nom;
+    stage.courriel = courriel;
+    stage.numeroTel = numeroTel;
+    stage.nomEntreprise = nomEntreprise;
+    stage.adresseEntreprise = adresseEntreprise;
+    stage.typeStage = typeStage;
+    stage.nombreDePostesDispo = nombreDePostesDispo;
+    stage.descriptionStage = descriptionStage;
+    stage.remuneration = remuneration;
     await stage.save();
   } catch {
     return next(
@@ -110,7 +105,7 @@ const supprimerStage = async (requete, reponse, next) => {
   const stageId = requete.params.stageId;
   let stage;
   try {
-    stage = await stage.findById(stageId).populate("createur");
+    stage = await Stage.findById(stageId);
   } catch {
     return next(
       new HttpErreur("Erreur lors de la suppression de la stage", 500)
@@ -122,8 +117,6 @@ const supprimerStage = async (requete, reponse, next) => {
 
   try {
     await stage.remove();
-    stage.createur.stages.pull(stage);
-    await stage.createur.save();
   } catch {
     return next(
       new HttpErreur("Erreur lors de la suppression de la stage", 500)
@@ -133,7 +126,7 @@ const supprimerStage = async (requete, reponse, next) => {
 };
 
 exports.getStageById = getStageById;
-exports.getStagesByUserId = getStagesByUserId;
 exports.creerStage = creerStage;
 exports.updateStage = updateStage;
 exports.supprimerStage = supprimerStage;
+exports.getStages = getStages;
