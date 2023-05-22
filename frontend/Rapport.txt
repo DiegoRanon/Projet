@@ -1,17 +1,63 @@
 lien : https://github.com/KonanBeats/Projet
 
 rapport partie 1: 
+1. créer des étudiants qui se font rajoutés dans la base de données l'ors de la création
+2. créer des stages qui se font rajoutés dans la base de données l'ors de la création
+3. Le site doits permettre de modifier et supprimer un stage et un etudiant sur la page web qui ensuite change les données dans 
+la base de données. 
+4.Le site permet d'assigner un étudiant à un stage 
+5. On peut naviger sur tous les pages du site à l'aide du menu de navigation
+6.Un tiroire qui apparet l'orsque la page est sous format mobile
+7. des filtres pour trier les stages/ eleves
+8. publier le sites
+supplementaires;
+9. Envoie du courriel lorsque un stage est dispo
+10. connextion et authentification compte prof et eleves
+11 postuler a un stage/ a l'aide  de son compte creer
+12 gere les offre de stages
+
 
 rapport partie 2: 
+On a implémenté l'ajout d'étudiant et de stage ainsi que la capacité de les modifier et de les supprimer sur le front end et dans 
+la base de données. On peut aller sur les différentes pages du site web  l'aide d'un menu de navigation et d'un tiroire l'orsque le site
+est en format téléphone.On a ajouter les filtres en bonne partie tout les fonctionnaliter sauf les fonctionnaliter supplementaires
+Le Déploiement a ete commencer mais pas fini donc le code est mis mais pas finaliser
 
 
-journal Chems : 
-   
+Rapport personnel :
 
-journal Lucas : 
 
-    
-journal Diego: 
+Journal de Chems :
 
-   
-     
+Avril 30 : Première journée, nous avons passé un appel à trois pour organiser le projet et créer le dépôt GitHub (3 heures).
+Mai 1 : Appel de 2 heures avec Lucas.
+Mai 6 : Appel avec tout le groupe pendant 3 heures.
+Mai 9 : Appel à trois pendant 3 heures.
+Mai 11 : Appel avec Diego pour connecter le backend (3 heures).
+Mai 20 : Travail à trois dans un appel Discord (3 heures).
+Mai 21 : Appel avec le groupe le soir pendant 6 heures.
+
+Journal de Lucas :
+
+Avril 30 : Première journée, nous avons passé un appel à trois pour organiser le projet et créer le dépôt GitHub (3 heures).
+Mai 3 : Appel de 2 heures avec Diego.
+Mai 1 : Appel de 2 heures avec Chems.
+Mai 6 : Appel avec tout le groupe pendant 3 heures.
+Mai 9 : Appel à trois pendant 3 heures.
+Mai 20 : Travail à trois dans un appel Discord (3 heures).
+Mai 21 : Travail en appel avec Diego pendant 2 heures le matin.
+Mai 21 : Appel avec le groupe le soir pendant 6 heures.
+
+Journal de Diego :
+
+Avril 30 : Première journée, nous avons passé un appel à trois pour organiser le projet et créer le dépôt GitHub (3 heures).
+Avril 30 : Début du développement du backend pendant 1 heure.
+Mai 3 : Appel avec Lucas.
+Mai 6 : Appel avec tout le groupe pendant 3 heures.
+Mai 8 : Travail en solo, car les deux autres étaient occupés.
+Mai 9 : Appel à trois pendant 3 heures.
+Mai 11 : Appel avec Diego pour connecter le backend (3 heures).
+Mai 19 : 1 heure de travail en solo pour de petites modifications.
+Mai 20 : Travail à trois dans un appel Discord (3 heures).
+Mai 21 : Travail en appel avec Lucas pendant 2 heures le matin.
+Mai 21 : Appel avec le groupe le soir pendant 6 heures.

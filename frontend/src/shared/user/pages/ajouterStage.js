@@ -5,6 +5,7 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import NouveauStage from "../../../formulaire/NouveauStage";
 import ListeStage from "../../../components/Stage/ListeStage";
 import FiltrageStage from "../../../components/Filtrage/FiltrageStage";
+import UpdateStage from "../../../shared/user/pages/UpdateStage";
 
 function AjouterStage() {
   // Variables
@@ -13,6 +14,8 @@ function AjouterStage() {
   const [filteredStages, setfilteredStages] = useState("option1");
   const [stages, setStages] = useState([]);
   const [deletedStageId, setDeletedStageId] = useState(null);
+  const [selectedStage, setSelectedStage] = useState(null);
+  const history = useHistory();
 
   const filterChangeHandler = (selectedOption) => {
     setfilteredStages(selectedOption);
@@ -32,6 +35,12 @@ function AjouterStage() {
   function ajouterStage(nouveauStage) {
     setStages(() => stages.concat(nouveauStage));
   }
+
+  const editStage = (stageId) => {
+    const selected = stages.find((stage) => stage.id === stageId);
+    setSelectedStage(selected);
+    history.push(`/update-stage/${stageId}`);
+  };
 
   useEffect(() => {
     const recupererStages = async () => {
@@ -66,13 +75,18 @@ function AjouterStage() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Yo c moi Lucas.</p>
-
         <FiltrageStage 
         selected={filteredStages}
         onChangementFiltre={filterChangeHandler}/>
 
-        <ListeStage stages={stageFiltrees} onDeleteStage={deleteStage}/>
+        <ListeStage stages={stageFiltrees} onEditStage = {editStage} onDeleteStage={deleteStage}/>
+        {selectedStage && (
+            <UpdateStage
+              etudiants={stages}
+              onEditStage={editStage}
+              onUpdateSuccess={() => setSelectedStage(null)}
+            />
+          )}
         <NouveauStage ajouterStage={ajouterStage} />
       </header>
     </div>

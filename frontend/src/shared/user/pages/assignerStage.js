@@ -5,33 +5,21 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import NouveauStage from "../../../formulaire/NouveauStage";
 import ListeStage from "../../../components/Stage/ListeStage";
 import FiltrageStage from "../../../components/Filtrage/FiltrageStage";
+import SelectStage from "../../../components/Stage/SelectStage"
 
 function AsignerStage() {
   // Variables
+  const { etudiantId } = useParams();
   const [erreur, setErreur] = useState();
   const {error, sendRequest, clearError } = useHttpClient();
   const [filteredStages, setfilteredStages] = useState("option1");
   const [stages, setStages] = useState([]);
   const [deletedStageId, setDeletedStageId] = useState(null);
-
-  const filterChangeHandler = (selectedOption) => {
-    setfilteredStages(selectedOption);
-  };
-
-  const deleteStage = async (stageId) => {
-    try {
-      await sendRequest(`http://localhost:5000/stages/${stageId}`, 'DELETE');
-      setDeletedStageId(stageId);
-    } catch (err) {
-      // Handle any errors
-
-    }
-  };
+  const [selectedStage, setSelectedStage] = useState(null);
+  const history = useHistory();
 
 
-  function ajouterStage(nouveauStage) {
-    setStages(() => stages.concat(nouveauStage));
-  }
+
 
   useEffect(() => {
     const recupererStages = async () => {
@@ -53,27 +41,30 @@ function AsignerStage() {
     }
   }, [deletedStageId]);
 
-  const stageFiltrees = stages.filter((etudiant) => {
-    if (filteredStages == "option1") {
-      return stages;
-    } else if (filteredStages == "option2") {
-      return stages.typeStage === "Réseaux et sécurité";
-    } else if (filteredStages == "option3") {
-      return stages.typeStage === "Développement d'applications";
+  const handleSelectStage = async (stageId) => {
+    try {
+      const responseData = await sendRequest(`http://localhost:5000/etudiants/assignerStage/${etudiantId}`, "PATCH",
+      JSON.stringify({
+        idStage:stageId
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      
+      );
+      console.log(responseData);
+      history.push('/stage/ajouter-etudiant');
+    } catch (err) {
+      console.log(err);
     }
-  });
+  };
+
 
   return (
     <div className="App">
       <header className="App-header">
         <p>Yo c moi Lucas.</p>
-
-        <FiltrageStage 
-        selected={filteredStages}
-        onChangementFiltre={filterChangeHandler}/>
-
-        <ListeStage stages={stageFiltrees} onDeleteStage={deleteStage}/>
-        <NouveauStage ajouterStage={ajouterStage} />
+        <SelectStage stages={stages}onSelectStage={handleSelectStage}/>
       </header>
     </div>
   );

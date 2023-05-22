@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import "../../style/Cours.css"
+import "../../style/Stage.css"
 import Card from "./components/Card";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useForm } from '../../shared/hooks/form-hook';
@@ -97,10 +97,7 @@ function Stage({ stage }) {
             <h3>{"Nombre de postes disponibles: " + stage.nombreDePostesDispo}</h3>
             <h3>{"Description du stage: " + stage.descriptionStage}</h3>
           </div>
-          <div className="place-item__actions">
-            <Button to={`/stages/${stage.id}`}>Modifier</Button>
 
-          </div>
       </Card>
 
 

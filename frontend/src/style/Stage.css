@@ -1,36 +1,42 @@
-/* styles.css */
-.users-list {
+/* styles.css   background-color: purple;*/
+.stage-list {
   list-style-type: none;
-  padding: 0;
+  padding: 1;
   flex-wrap: wrap;
   align-content: center;
   font-size: 18px;  
+
+
 }
 
-.users-list-solo {
+.stage-solo {
+  font-size: 18px;
   justify-content: center;
   padding: 10;
   background-color: #dbdbdb;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
+  margin-bottom: 15px 0px;
+
+  
 }
 
-.users-list-solo .card-title {
+.stage-solo .card-title {
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.users-list-solo .card-content {
+.stage-solo .card-content {
   margin-bottom: 10px;
 }
 
-.users-list-solo .card-actions {
+.stage-solo .card-actions {
   display: flex;
   justify-content: center;
 }
 
-.users-list-solo .card-actions .ButtonList {
+.stage-solo .card-actions .ButtonList {
   margin-right: 10px;
 }
 

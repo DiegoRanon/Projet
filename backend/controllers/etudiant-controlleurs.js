@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const HttpErreur = require("../models/http-erreur");
 
 const Etudiant = require("../models/etudiant");
+const Stage = require("../models/stage");
 
 const ETUDIANTS = [];
 
@@ -108,15 +109,21 @@ const updateEtudiant = async (requete, reponse, next) => {
 };
 
 const assignerStage = async (requete, reponse, next) => {
-  const { stage } = requete.body;
+  const { idStage } = requete.body;
   const etudiantId = requete.params.etudiantId;
 
   let etudiant;
+  let stage;
 
   try {
     etudiant = await Etudiant.findById(etudiantId);
+    console.log(etudiant)
+    stage = await Stage.findById(idStage);
+    console.log(stage)
     etudiant.stage = stage;
+    stage.etudiants.push(etudiant)
     await etudiant.save();
+    await stage.save();
   } catch (err) {
     console.log(err);
     return next(new HttpErreur("Erreur lors de l'ajout de l'étudiant", 422));

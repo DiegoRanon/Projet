@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
@@ -18,6 +18,7 @@ function UpdateEtudiant({ etudiants, onUpdateSuccess }) {
   const [saisieNom, setSaisieNom] = useState(etudiant.nom);
   const [saisieDA, setSaisieDA] = useState(etudiant.DA);
   const [saisieProfil, setSaisieProfil] = useState(etudiant.profil);
+  const history = useHistory();
 
     const fetchEtudiant = async (event) => {
         event.preventDefault();
@@ -35,6 +36,7 @@ function UpdateEtudiant({ etudiants, onUpdateSuccess }) {
         
         );
         console.log(responseData);
+        history.push(`/stage/ajouter-etudiant`);
       } catch (err) {
         console.log(err);
       }

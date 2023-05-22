@@ -27,7 +27,7 @@ function ListeEtudiant(props) {
         <div key={etudiant.id} className="users-list-solo">
           <div className="place-item__actions">
           <Etudiant key={etudiant.id} etudiant={etudiant} />
-          <button className="ButtonList" onClick={() => props.onAsignerStage(etudiant.id)}>Assigner à un Stage</button>
+          <button className="ButtonList" onClick={() => props.onAssignerStage(etudiant.id)}>Assigner à un Stage</button>
           <button className="ButtonList" onClick={() => props.onEditEtudiant(etudiant.id)}>Update</button>
           <button className="ButtonList" onClick={() => props.onDeleteEtudiant(etudiant.id)}>
             Delete

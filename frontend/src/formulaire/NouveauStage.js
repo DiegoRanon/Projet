@@ -34,6 +34,8 @@ function NouveauStage({ ajouterStage }) {
   const [saisieTypeStage, setSaisieTypeStage] = useState("");
   const [saisieRemuneration, setSaisieRemuneration] = useState("");
 
+  const history = useHistory();
+
   const ajoutNouveauStageHandler = async (event) => {
     event.preventDefault();
     if (
@@ -79,6 +81,7 @@ function NouveauStage({ ajouterStage }) {
         );
 
         console.log(reponseData);
+        history.push(`stage/ajouter-stage`);
       } catch (err) {
         console.log(err);
       }

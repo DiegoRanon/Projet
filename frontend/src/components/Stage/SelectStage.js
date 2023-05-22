@@ -2,7 +2,7 @@ import React from "react";
 import Stage from "./Stage";
 import Card from "./components/Card";
 
-function ListeStage(props) {
+function SelectStage(props) {
 
 
   if (props.stages.length === 0) {
@@ -18,13 +18,10 @@ function ListeStage(props) {
   return (
     <ul className="stage-list">
       {props.stages.map((stage) => (
-        <div key={stage.id} className="stage-solo">
+        <div key={stage.id}>
         <Stage key={stage.id} stage={stage} />
-        <button className="ButtonList" onClick={() => props.onEditStage(stage.id)}>
-            Modifier
-          </button>
-        <button className="ButtonList" onClick={() => props.onDeleteStage(stage.id)}>
-            Delete
+        <button onClick={() => props.onSelectStage(stage.id)}>
+            Choisir
           </button>
         </div>
       ))}
@@ -32,6 +29,6 @@ function ListeStage(props) {
   );
 }
 
-export default ListeStage;
+export default SelectStage;
 
 

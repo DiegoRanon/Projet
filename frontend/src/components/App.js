@@ -20,11 +20,14 @@ import AjouterEtudiant from "../shared/user/pages/ajouterEtudiant";
 import Footer from "../shared/user/pages/Footer";
 import UpdateEtudiant from "../shared/user/pages/UpdateEtudiant";
 import AsignerStage from "../shared/user/pages/assignerStage";
+import UpdateStage from "../shared/user/pages/UpdateStage"
 
 function App() {
   const {error, sendRequest, clearError } = useHttpClient();
   const [etudiants, setEtudiants] = useState([]);
+  const [stages, setStages] = useState([]);
 
+  // Étudiants 
   useEffect(() => {
     const recupererEtudiants = async () => {
       try {
@@ -37,6 +40,35 @@ function App() {
     };
     recupererEtudiants();
   }, [sendRequest]);
+
+  // Stages
+
+  useEffect(() => {
+    const recupererStages = async () => {
+      try {
+        const reponseData = await sendRequest("http://localhost:5000/stages");
+
+        setStages(reponseData.stages);
+      } catch (err) {
+        
+      }
+    };
+    recupererStages();
+  }, [sendRequest]);
+
+  const updateStageHandler = useCallback((updatedStage) => {
+    setStages((prevStages) => {
+      const updatedIndex = prevStages.findIndex(
+        (stage) => stage.id === updatedStage.id
+      );
+      if (updatedIndex !== -1) {
+        const updatedStages = [...prevStages];
+        updatedStages[updatedIndex] = updatedStage;
+        return updatedStages;
+      }
+      return prevStages;
+    });
+  }, []);
 
   const updateEtudiantHandler = useCallback((updatedEtudiant) => {
     setEtudiants((prevEtudiants) => {
@@ -52,6 +84,8 @@ function App() {
     });
   }, []);
 
+  
+  
   return (
     <Router>
       <MainNavigation />
@@ -78,6 +112,17 @@ function App() {
                 {...props}
                 etudiants={etudiants}
                 onUpdateEtudiant={updateEtudiantHandler}
+              />
+            )}
+          />
+
+          <Route
+            path="/update-stage/:stageId"
+            render={(props) => (
+              <UpdateStage
+                {...props}
+                stages={stages}
+                onUpdateStage={updateStageHandler}
               />
             )}
           />

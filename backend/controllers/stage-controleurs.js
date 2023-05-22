@@ -81,7 +81,8 @@ const updateStage = async (requete, reponse, next) => {
   let stage;
 
   try {
-    stage = await stage.findById(stageId);
+    stage = await Stage.findById(stageId);
+    console.log(stage)
     stage.nom = nom;
     stage.courriel = courriel;
     stage.numeroTel = numeroTel;

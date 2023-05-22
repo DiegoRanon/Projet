@@ -37,7 +37,7 @@ function AjouterEtudiant() {
   };
 
   const assignerStage = (etudiantId) => {
-    history.push(`/update-etudiant/${etudiantId}`);
+    history.push(`/asignerStage/${etudiantId}`);
   };
 
   const editEtudiant = (etudiantId) => {
@@ -103,6 +103,7 @@ function AjouterEtudiant() {
               onUpdateSuccess={() => setSelectedEtudiant(null)}
             />
           )}
+          
           <NouveauEtudiant ajouterEtudiant={ajouterEtudiant} />
         </React.Fragment>
       </header>
